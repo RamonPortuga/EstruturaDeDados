@@ -19,6 +19,7 @@ struct No{
 typedef struct No NoArv;
 
 /*Função auxiliar que serve para definir a maior altura*/
+/*Feita com base no algortimo feito em aula*/
 int max (int esq, int dir){
 	if(esq > dir){
 		return esq;
@@ -83,6 +84,9 @@ NoArv* insereAVL(NoArv *ptraiz, int chave){
 		return (criaNoArv(ptraiz, chave));
 	}
 	else{
+		if (chave == ptraiz->chave){
+			return ptraiz;
+		}
 		if(chave < ptraiz->chave){
 			ptraiz->esq = insereAVL(ptraiz->esq, chave);
 		}
@@ -93,6 +97,8 @@ NoArv* insereAVL(NoArv *ptraiz, int chave){
 			return ptraiz;
 		}
 		
+		/*Calculo da altura feito com bas eno algoritmo apresentado
+		em aula*/
 		ptraiz->alt = (max(altura(ptraiz->esq), altura(ptraiz->dir)) + 1);
 		
 		int reg = 0;
@@ -137,6 +143,15 @@ void imprimePreOrdem(NoArv *ptraiz){
    }
 }
 
+/*Libera os espaços de memória da árvore AVL*/
+void liberaArvore(NoArv *ptraiz) {
+    if(ptraiz != NULL) {
+        liberaArvore(ptraiz->esq);
+        liberaArvore(ptraiz->dir);
+        free(ptraiz);
+    }
+}
+
 /*Main do programa, onde se encontrará todas as chamadas
 e testes do mesmo*/
 int main(){
@@ -153,13 +168,14 @@ int main(){
                 printf("\n");
             }
             if(str[0] == 'i') {
-            	//int num;
                 if(scanf("%d", &num) == 1) {
                     ptraiz = insereAVL(ptraiz, num);
                 }
             }
         }
     }
+    
+    liberaArvore(ptraiz);
 	
 	return 0;
 }
