@@ -33,12 +33,10 @@ NoArv* insereArvBin (int valor, NoArv *ptraiz){
 		if (valor == ptraiz->valor){
 			return ptraiz;
 		}
-		
-		if(valor < ptraiz->valor){
+		else if(valor < ptraiz->valor){
 			ptraiz->esq = insereArvBin(valor, ptraiz->esq);
 		}
-		
-		if(valor > ptraiz->valor){
+		else if(valor > ptraiz->valor){
 			ptraiz->dir = insereArvBin(valor, ptraiz->dir);
 		}
 	}
