@@ -51,6 +51,7 @@ NoArv* calculaSomaTotal (NoArv *ptraiz){
 		ptraiz->soma = calculaSoma (ptraiz->esq) + calculaSoma(ptraiz->dir)
 						+ ptraiz->valor;
 	}
+	return ptraiz;
 }
 
 int calculaSoma(NoArv *ptraiz){
@@ -112,12 +113,12 @@ void liberaArvore(NoArv *ptraiz){
 }
 
 /*Função que serve para mostrar a Árvore Binária
-na tela*/
-void imprimeArvBin(NoArv *ptraiz){
+na tela no formato de Pré-Ordem*/
+void imprimeArvBinPreOrdem(NoArv *ptraiz){
     if(ptraiz != NULL){
-        imprimeArvBin(ptraiz->esq);
-        imprimeArvBin(ptraiz->dir);
-        printf("%d(%d) ", ptraiz->valor, ptraiz->soma);
+    	printf("%d(%d) ", ptraiz->valor, ptraiz->soma);
+        imprimeArvBinPreOrdem(ptraiz->esq);
+        imprimeArvBinPreOrdem(ptraiz->dir);
    }
 }
 
@@ -132,7 +133,12 @@ int main(){
 	ptraiz = insereCalculandoSoma (10, ptraiz);
 	ptraiz = insereCalculandoSoma (12, ptraiz);
 	
-	imprimeArvBin(ptraiz);
+	ptraiz = calculaSomaTotal(ptraiz);
+	
+	printf("Soma total dos elementos presentes na %crvore: \t%d\n\n", 
+			160, ptraiz->soma);
+	
+	imprimeArvBinPreOrdem(ptraiz);
 	
 	liberaArvore(ptraiz);
 	
