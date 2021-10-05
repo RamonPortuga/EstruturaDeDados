@@ -43,17 +43,16 @@ NoArv* insereArvBin (int valor, NoArv *ptraiz){
 	return ptraiz;
 }
 
+/*Calcula a soma total dos nós da árvore.*/
 NoArv* calculaSomaTotal (NoArv *ptraiz){
-	if(ptraiz == NULL){
-		return ptraiz;
-	}
-	else{
+	if(ptraiz != NULL){
 		ptraiz->soma = calculaSoma (ptraiz->esq) + calculaSoma(ptraiz->dir)
 						+ ptraiz->valor;
 	}
 	return ptraiz;
 }
 
+/*Calcula as somas "parciais". */
 int calculaSoma(NoArv *ptraiz){
 	int soma = 0;
 	
