@@ -63,7 +63,7 @@ int calculaSoma(NoArv *ptraiz){
 		
 		soma += calculaSoma (ptraiz->esq);
 		soma += calculaSoma (ptraiz->dir);
-		ptraiz->soma = ptraiz->valor + soma;
+		ptraiz->soma = soma + ptraiz->valor;
 		
 		return ptraiz->soma; 
 	}
